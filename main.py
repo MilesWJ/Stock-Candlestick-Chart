@@ -24,22 +24,23 @@ def stock_chart():
     Stock.start = dt.datetime(start_year, start_month, start_day)
     Stock.end = dt.datetime(end_year, end_month, end_day)
 
-    data = web.DataReader(Stock.stockticker, Stock.finance_api, Stock.start, Stock.end)
+    data = web.DataReader(
+        Stock.stockticker, Stock.finance_api, Stock.start, Stock.end)
 
-    
-    def set_up():    
-        
-        COLORS = mpf.make_marketcolors(up="#00ff00", down="#ff0000", wick="inherit", edge="inherit", volume="in")
-        STYLE = mpf.make_mpf_style(base_mpf_style="nightclouds", marketcolors=COLORS)
+    def set_up():
+
+        COLORS = mpf.make_marketcolors(
+            up="#00ff00", down="#ff0000", wick="inherit", edge="inherit", volume="in")
+        STYLE = mpf.make_mpf_style(
+            base_mpf_style="nightclouds", marketcolors=COLORS)
         TITLE = f"\n{Stock.stockticker} CANDLESTICK STOCK CHART"
-        
+
         print(f"\nCreating {Stock.stockticker} candlestick stock chart...")
 
         mpf.plot(data, type="candle", style=STYLE, volume=True, title=TITLE)
-        
+
         print(f"Closing {Stock.stockticker} candlestick stock...")
 
-    
     set_up()
 
 
